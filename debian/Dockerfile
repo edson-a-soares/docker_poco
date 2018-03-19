@@ -20,10 +20,10 @@ RUN apt-get update -qq \
 		cmake \
 		gcc-6 \
 		g++-6 \
-	&& update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6
-
-# Install Poco C++ Libraries 1.9.0
-RUN curl -fsSL "${POCO_DOWNLOAD_URL}" -o /tmp/poco.tar.gz \
+	&& update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6 \
+			\
+	# Install Poco C++ Libraries 1.9.0
+	&& curl -fsSL "${POCO_DOWNLOAD_URL}" -o /tmp/poco.tar.gz \
 	&& echo "$POCO_DOWNLOAD_SHA256  /tmp/poco.tar.gz" | sha256sum -c - \
 	&& tar --directory /tmp -xzf /tmp/poco.tar.gz \
 	&& cd /tmp/poco-1.9.0-all && ./configure --no-tests --no-samples --everything \
