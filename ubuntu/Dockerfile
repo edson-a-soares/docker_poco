@@ -20,6 +20,8 @@ RUN apt-get update -qq \
 		libncurses-dev \
 		libmysqlclient-dev \
 		pkg-config \
+		apache2 \
+		apache2-dev \
 		cmake \
 		gcc-6 \
 		g++-6 \
