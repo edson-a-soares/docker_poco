@@ -45,10 +45,15 @@ RUN apt-get update -qq \
 
 RUN git clone https://github.com/edson-a-soares/poco.git  /tmp/poco \
 	&& cd /tmp/poco && cmake . \
+		-DPOCO_ENABLE_SQL=ON \
+		-DPOCO_ENABLE_SQL_ODBC=ON \
+		-DPOCO_ENABLE_SQL_MYSQL=ON \
+		-DPOCO_ENABLE_SQL_SQLITE=ON \
 	&& make && make install \
-	&& cp -p /tmp/poco/lib/libmod_poco.so /usr/lib/apache2/modules/mod_poco.so
-	# && rm /tmp/poco
+	&& cp -p /tmp/poco/lib/libmod_poco.so /usr/lib/apache2/modules/mod_poco.so \
+	&& rm -rf /tmp/poco
 
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 CMD ["/usr/sbin/apachectl", "-DFOREGROUND"]
+
